@@ -33,22 +33,19 @@ class OhmLawViewController: UIViewController {
     
     var clickForSwitch: Bool = true
 
-    
-    func createInformationButton() -> UIButton {
-        var informationButton = UIButton()
-        informationButton.frame = CGRect(x: 50, y: 50, width: 34, height: 28)
-        informationButton.layer.cornerRadius = 2
-        informationButton.setImage(imageInformation, for: UIControl.State.normal)
-        informationButton.addTarget(self, action: #selector(goToTheInformationView), for: UIControl.Event.touchUpInside)
-        return informationButton
-    }
+
+//    func createInformationButton() -> UIButton {
+//        let informationButton = UIButton()
+//        informationButton.frame = CGRect(x: view.safeAreaInsets.right - 80, y: view.safeAreaInsets.top + 500, width: 34, height: 28)
+//        informationButton.layer.cornerRadius = 2
+//        informationButton.setImage(imageInformation, for: UIControl.State.normal)
+//        informationButton.addTarget(self, action: #selector(goToTheInformationView), for: UIControl.Event.touchUpInside)
+//        return informationButton
+//    }
     
     @objc func goToTheInformationView() {
-        let ohmLawViewController = OhmLawViewController()
-        let informationViewController = InformationViewController()
-        let segue = UIStoryboardSegue(identifier: "toInformationView", source: ohmLawViewController, destination: informationViewController)
-        prepare(for: segue, sender: <#T##Any?#>)
-        
+        let informationViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "InformationViewController")
+        self.navigationController?.pushViewController(informationViewController, animated: true)
     }
     
     
@@ -58,8 +55,14 @@ class OhmLawViewController: UIViewController {
         setImageOnTheButtons()
         setStartValueForTextField()
         configurateTextFields()
-        view.addSubview(createInformationButton())
+//        view.addSubview(createInformationButton())
     }
+    
+//    func setConstraints() {
+//    self.informationButton.snp.makeConstraints { make in
+//        make.right.equalTo(view).offset(20)
+//    }
+//    }
  
     func setStartValueForTextField() {
     currentStrengthTextField.text = "0"
@@ -225,7 +228,10 @@ class OhmLawViewController: UIViewController {
     
     func setImageOnTheButtons() {
         selectionCurrent.setImage(UIImage(systemName: "arrow.right.circle"), for: UIControl.State.normal)
+        selectionCurrent.setTitle("", for: UIControl.State.normal)
         selectionVoltage.setImage(UIImage(systemName: "arrow.right.circle"), for: UIControl.State.normal)
+        selectionVoltage.setTitle("", for: UIControl.State.normal)
         selectionResistance.setImage(UIImage(systemName: "arrow.right.circle"), for: UIControl.State.normal)
+        selectionResistance.setTitle("", for: UIControl.State.normal)
     }
 }
